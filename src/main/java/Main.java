@@ -33,15 +33,21 @@ public class Main {
 
                 writer.write(obj.toJSONString());
 
+                //correctedLine.append("{");
+                JSONObject fields = new JSONObject();
+                fields.put("fields",correctedLine );
+                //correctedLine.append(fields);
+
+
+
                 for(int i = 0; i<line.length(); i++)
                 {
-
 
                     if((line.charAt(i) == '$') || (line.charAt(i) == '-'))
                     {
 
-
                     }
+
                     else if(line.charAt(i) == '_')
                     {
                         correctedLine.append("rater");
@@ -50,7 +56,14 @@ public class Main {
                     {
                         correctedLine.append((line.charAt(i)));
                     }
+
+
                 }
+
+
+                //correctedLine.append("}");
+
+
 
                 // We increment the number of the document
                 document = document + 1 ;
@@ -60,7 +73,9 @@ public class Main {
 
                 writer.write("\n");
 
-                writer.write(correctedLine.toString());
+                //writer.write(correctedLine.toString());
+                writer.write(fields.toJSONString());
+
                 writer.write("\n");
 
             }
