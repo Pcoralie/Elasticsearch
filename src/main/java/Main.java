@@ -6,9 +6,11 @@ import java.io.*;
 
 
 public class Main {
-    public static void JsonReading(String fileName)
 
-    {   String result = "";
+
+    public static void JsonReading(String fileName)
+    {
+        String result = "";
         try {
             final FileWriter writer = new FileWriter("MovieLensElasticsearch.json");
             BufferedReader br = new BufferedReader(new FileReader(fileName));
@@ -34,8 +36,8 @@ public class Main {
                 writer.write(obj.toJSONString());
 
                 //correctedLine.append("{");
-                JSONObject fields = new JSONObject();
-                fields.put("fields",correctedLine );
+                //JSONObject fields = new JSONObject();
+                //fields.put("fields",correctedLine );
                 //correctedLine.append(fields);
 
 
@@ -73,8 +75,8 @@ public class Main {
 
                 writer.write("\n");
 
-                //writer.write(correctedLine.toString());
-                writer.write(fields.toJSONString());
+                writer.write(correctedLine.toString());
+                //writer.write(fields.toJSONString());
 
                 writer.write("\n");
 
@@ -87,15 +89,59 @@ public class Main {
         }
     }
 
+    public static void SplitFile( String file) {
+
+        try {
+            final FileWriter writer1 = new FileWriter("MovieLensElasticsearch1.json");
+            final FileWriter writer2 = new FileWriter("MovieLensElasticsearch2.json");
+            final FileWriter writer3 = new FileWriter("MovieLensElasticsearch3.json");
+
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line = br.readLine();
+
+            int number = 0 ;
+
+            while (line != null) {
+
+                if ( number <= 665551){
+                    writer1.write(line.toString());
+                    writer1.write("\n");
+
+                }
+                else if (number > 1331101){
+                    writer3.write(line.toString());
+                    writer3.write("\n");
+
+                }
+                else {
+                    writer2.write(line.toString());
+                    writer2.write("\n");
+
+                }
+                number = number + 1 ;
+                line = br.readLine();
 
 
 
+            }
+
+            writer3.write("\n");
+            writer2.write("\n");
+            writer1.write("\n");
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 
 
     public static void main(String[] args){
 
         JsonReading("MovieLens_ratingUsers.json");
+        SplitFile("MovieLensElasticsearch.json");
     }
 
 
