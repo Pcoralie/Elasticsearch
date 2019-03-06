@@ -11,5 +11,7 @@ buildNumber.properties
 MovieLensElasticsearch.json
 MovieLens_ratingUsers.json
 
+.json
+
 # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar

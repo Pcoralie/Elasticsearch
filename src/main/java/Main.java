@@ -126,7 +126,64 @@ public class Main {
             }
 
             writer3.write("\n");
+            writer3.write("\n");
+
             writer2.write("\n");
+            writer2.write("\n");
+
+            writer1.write("\n");
+            writer1.write("\n");
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void SplitFile2( String file) {
+
+        try {
+            final FileWriter writer1 = new FileWriter("MovieLens7.json");
+            final FileWriter writer2 = new FileWriter("MovieLens8.json");
+            final FileWriter writer3 = new FileWriter("MovieLens9.json");
+
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line = br.readLine();
+
+            int number = 0 ;
+
+            while (line != null) {
+
+                if ( number <= 221850){
+                    writer1.write(line.toString());
+                    writer1.write("\n");
+
+                }
+                else if (number > 443701){
+                    writer3.write(line.toString());
+                    writer3.write("\n");
+
+                }
+                else {
+                    writer2.write(line.toString());
+                    writer2.write("\n");
+
+                }
+                number = number + 1 ;
+                line = br.readLine();
+
+
+
+            }
+
+            writer3.write("\n");
+            writer3.write("\n");
+
+            writer2.write("\n");
+            writer2.write("\n");
+
+            writer1.write("\n");
             writer1.write("\n");
 
 
@@ -142,6 +199,7 @@ public class Main {
 
         JsonReading("MovieLens_ratingUsers.json");
         SplitFile("MovieLensElasticsearch.json");
+        SplitFile2("MovieLensElasticsearch3.json");
     }
 
 
